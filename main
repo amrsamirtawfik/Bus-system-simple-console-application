@@ -1,0 +1,234 @@
+#include <iostream>
+#include "CairoSokhnaTrip.h"
+#include "CairoSa7elTrip.h"
+#include "CairoAlexTrip.h"
+#include "CairoSokhnaTimeTrip.h"
+#include "CairoSa7elTimeTrip.h"
+#include "CairoSa7elTimeTrip.h"
+#include "Bus.h"
+#include "Trip.h"
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    //creating the trips of monday
+    Bus b1,b2,b3,b4,b5,b6;
+    Trip CSo1("Cairo","Sokhna","12:00 PM", "Monday",b1);
+    Trip CSo2("Cairo","Sokhna","06:00 PM", "Monday",b1);
+    Trip CSo3("Sokhna","Cairo","12:00 PM", "Monday",b2);
+    Trip CSo4("Sokhna","Cairo","06:00 PM", "Monday",b2);
+    Trip CSa1("Cairo","Sa7el","12:00 PM", "Monday",b3);
+    Trip CSa2("Cairo","Sa7el","06:00 PM", "Monday",b3);
+    Trip CSa3("Sa7el","Cairo","12:00 PM", "Monday",b4);
+    Trip CSa4("Sa7el","Cairo","06:00 PM", "Monday",b4);
+    Trip CA1("Cairo","Alex","12:00 PM", "Monday",b5);
+    Trip CA2("Cairo","Alex","06:00 PM", "Monday",b5);
+    Trip CA3("Alex","Cairo","12:00 PM", "Monday",b6);
+    Trip CA4("Alex","Cairo","06:00 PM", "Monday",b6);
+    Trip CairoDep_Trips [10]={CSo1,CSo2,CSa1,CSa2,CA1,CA2};
+    Trip SokhnaDep_Trips [10]={CSo3,CSo4};
+    Trip Sa7elDep_Trips[10]={CSa3,CSa4};
+    Trip AlexDep_Trips[10]={CA3,CA4};
+
+//input
+    string tempDes,tempDep,tempTime,tempPlace;
+    cout << "Please enter the departure and destination. (the available departures and destinations are: Cairo,Sokhna,Sa7el)" << endl << "The departure: " ;
+    cin >> tempDep;
+    cout << "The destination: " ;
+    cin >> tempDes;
+
+    //searching
+    if (tempDep=="Cairo"){
+            int tripLoc;
+            bool found=false,timeFound=false,placeFound=false;
+        for (int i=0;i<10;i++){
+            if (tempDes==CairoDep_Trips[i].getDes()){
+                    found=true;
+            cout << "There is a trip available at: " << CairoDep_Trips[i].getTime()<< endl;
+            }
+        }
+        if (found){
+
+            cout << "Enter the time you want to travel. (you must enter in the same format. ex: 06:00 PM)"<< endl;
+            getline(cin>>ws,tempTime);
+            for (int i=0;i<10;i++){
+            if (tempDes==CairoDep_Trips[i].getDes() && tempTime==CairoDep_Trips[i].getTime()){
+                timeFound=true;
+                tripLoc=i;
+            cout << "The seats locations are: - " << endl;
+            cout << "Driver \t A1 \t A2 \n B1 \t B2 \t B3 \n C1 \t C2 \t C3 \n D1 \t D2 \t D3 \n E1 \t E2 \t E3 \n" ;
+            cout << "Enter the seat you want to sit." << endl;
+            cin >>tempPlace;
+            for(int i=0;i<14;i++){
+                if (tempPlace==CairoDep_Trips[tripLoc].bus.seats[i]){
+                        placeFound=true;
+                    cout << "Booked!" << endl;
+                    cout <<"The trip details: "<< endl;
+                    cout << "The departure: " << AlexDep_Trips[tripLoc].getDep() << endl;
+                    cout << "The destination: " << AlexDep_Trips[tripLoc].getDes()<< endl;
+                    cout << "The time: " << AlexDep_Trips[tripLoc].getTime()<< endl;
+                    cout << "The day: " << AlexDep_Trips[tripLoc].getDay()<< endl;
+                    cout << "The bus place: " << AlexDep_Trips[tripLoc].bus.seats[i]<< endl;
+                }
+            }
+            if(!placeFound){
+                cout << "No place with this name is found" << endl;
+            }
+
+            }
+        }
+        if(!timeFound){
+            cout <<"There is no available trip at this time"<< endl;
+        }
+        }
+        if (!found) cout << "There are no available trips." << endl;
+    }
+
+    else if (tempDep=="Sokhna"){
+             int tripLoc;
+            bool found=false,timeFound=false,placeFound=false;
+        for (int i=0;i<10;i++){
+            if (tempDes==SokhnaDep_Trips[i].getDes()){
+                    found=true;
+            cout << "There is a trip available at: " << SokhnaDep_Trips[i].getTime()<< endl;
+            }
+        }
+         if (found){
+
+            cout << "Enter the time you want to travel. (you must enter in the same format. ex: 06:00 PM)"<< endl;
+            getline(cin>>ws,tempTime);
+            for (int i=0;i<10;i++){
+            if (tempDes==SokhnaDep_Trips[i].getDes() && tempTime==SokhnaDep_Trips[i].getTime()){
+                timeFound=true;
+                tripLoc=i;
+            cout << "The seats locations are: - " << endl;
+            cout << "Driver \t A1 \t A2 \n B1 \t B2 \t B3 \n C1 \t C2 \t C3 \n D1 \t D2 \t D3 \n E1 \t E2 \t E3 \n" ;
+            cout << "Enter the seat you want to sit." << endl;
+            cin >>tempPlace;
+            for(int i=0;i<14;i++){
+                if (tempPlace==SokhnaDep_Trips[tripLoc].bus.seats[i]){
+                        placeFound=true;
+                    cout << "Booked!" << endl;
+                    cout <<"The trip details: "<< endl;
+                    cout << "The departure: " << AlexDep_Trips[tripLoc].getDep() << endl;
+                    cout << "The destination: " << AlexDep_Trips[tripLoc].getDes()<< endl;
+                    cout << "The time: " << AlexDep_Trips[tripLoc].getTime()<< endl;
+                    cout << "The day: " << AlexDep_Trips[tripLoc].getDay()<< endl;
+                    cout << "The bus place: " << AlexDep_Trips[tripLoc].bus.seats[i]<< endl;
+                }
+            }
+            if(!placeFound){
+                cout << "No place with this name is found" << endl;
+            }
+
+            }
+        }
+        if(!timeFound){
+            cout <<"There is no available trip at this time"<< endl;
+        }
+        }
+        if (!found) cout << "There are no available trips." << endl;
+    }
+
+    else if (tempDep=="Sa7el"){
+            int tripLoc;
+            bool found=false,timeFound=false,placeFound=false;
+        for (int i=0;i<10;i++){
+            if (tempDes==Sa7elDep_Trips[i].getDes()){
+                    found=true;
+            cout << "There is a trip available at: " << Sa7elDep_Trips[i].getTime()<< endl;
+            }
+        }
+         if (found){
+
+            cout << "Enter the time you want to travel. (you must enter in the same format. ex: 06:00 PM)"<< endl;
+            getline(cin>>ws,tempTime);
+            for (int i=0;i<10;i++){
+            if (tempDes==Sa7elDep_Trips[i].getDes() && tempTime==Sa7elDep_Trips[i].getTime()){
+                timeFound=true;
+                tripLoc=i;
+            cout << "The seats locations are: - " << endl;
+            cout << "Driver \t A1 \t A2 \n B1 \t B2 \t B3 \n C1 \t C2 \t C3 \n D1 \t D2 \t D3 \n E1 \t E2 \t E3 \n" ;
+            cout << "Enter the seat you want to sit." << endl;
+            cin >>tempPlace;
+            for(int i=0;i<14;i++){
+                if (tempPlace==Sa7elDep_Trips[tripLoc].bus.seats[i]){
+                        placeFound=true;
+                    cout << "Booked!" << endl;
+                    cout <<"The trip details: "<< endl;
+                    cout << "The departure: " << AlexDep_Trips[tripLoc].getDep() << endl;
+                    cout << "The destination: " << AlexDep_Trips[tripLoc].getDes()<< endl;
+                    cout << "The time: " << AlexDep_Trips[tripLoc].getTime()<< endl;
+                    cout << "The day: " << AlexDep_Trips[tripLoc].getDay()<< endl;
+                    cout << "The bus place: " << AlexDep_Trips[tripLoc].bus.seats[i]<< endl;
+                }
+            }
+            if(!placeFound){
+                cout << "No place with this name is found" << endl;
+            }
+
+            }
+        }
+        if(!timeFound){
+            cout <<"There is no available trip at this time"<< endl;
+        }
+        }
+        if (!found) cout << "There are no available trips." << endl;
+    }
+
+    else if (tempDep=="Alex"){
+          int tripLoc;
+            bool found=false,timeFound=false,placeFound=false;
+        for (int i=0;i<10;i++){
+            if (tempDes==AlexDep_Trips[i].getDes()){
+                    found=true;
+            cout << "There is a trip available at: " << AlexDep_Trips[i].getTime()<< endl;
+            }
+        }
+         if (found){
+
+            cout << "Enter the time you want to travel. (you must enter in the same format. ex: 06:00 PM)"<< endl;
+            getline(cin>>ws,tempTime);
+            for (int i=0;i<10;i++){
+            if (tempDes==AlexDep_Trips[i].getDes() && tempTime==AlexDep_Trips[i].getTime()){
+                timeFound=true;
+                tripLoc=i;
+            cout << "The seats locations are: - " << endl;
+            cout << "Driver \t A1 \t A2 \n B1 \t B2 \t B3 \n C1 \t C2 \t C3 \n D1 \t D2 \t D3 \n E1 \t E2 \t E3 \n" ;
+            cout << "Enter the seat you want to sit." << endl;
+            cin >>tempPlace;
+            for(int i=0;i<14;i++){
+                if (tempPlace==AlexDep_Trips[tripLoc].bus.seats[i]){
+
+                        placeFound=true;
+                    cout << "Booked!" << endl;
+                    cout <<"The trip details: "<< endl;
+                    cout << "The departure: " << AlexDep_Trips[tripLoc].getDep() << endl;
+                    cout << "The destination: " << AlexDep_Trips[tripLoc].getDes()<< endl;
+                    cout << "The time: " << AlexDep_Trips[tripLoc].getTime()<< endl;
+                    cout << "The day: " << AlexDep_Trips[tripLoc].getDay()<< endl;
+                    cout << "The bus place: " << AlexDep_Trips[tripLoc].bus.seats[i]<< endl;
+
+                }
+            }
+            if(!placeFound){
+                cout << "No place with this name is found" << endl;
+            }
+
+            }
+        }
+        if(!timeFound){
+            cout <<"There is no available trip at this time"<< endl;
+        }
+        }
+        if (!found) cout << "There are no available trips." << endl;
+    }
+
+    else {
+       cout << "There are no available trips." << endl;
+    }
+
+    return 0;
+}
